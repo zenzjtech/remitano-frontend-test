@@ -6,7 +6,6 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -20,9 +19,10 @@ function Copyright() {
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
         Your Website
-      </Link>{' '}
+      </Link>
+      {' '}
       {new Date().getFullYear()}
-      {'.'}
+      .
     </Typography>
   );
 }
@@ -63,9 +63,9 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Album() {
   const classes = useStyles();
-  
+
   return (
-    <React.Fragment>
+    <>
       <AppBar position="relative">
         <Toolbar>
           <CameraIcon className={classes.icon} />
@@ -146,6 +146,6 @@ export default function Album() {
         <Copyright />
       </footer>
       {/* End footer */}
-    </React.Fragment>
+    </>
   );
 }
