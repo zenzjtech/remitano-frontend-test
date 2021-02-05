@@ -7,7 +7,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import reduxStore from './store';
 import theme from './theme/index';
-import Album from './Album';
+import Album from './page/home/Album';
 
 const { store, persistor } = reduxStore();
 
