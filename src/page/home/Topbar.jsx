@@ -11,6 +11,8 @@ import {
 } from '@material-ui/icons';
 import InputBase from '@material-ui/core/InputBase';
 import { connect } from 'react-redux';
+import { appAction } from '../../actions'
+import { useState } from 'react'
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -34,7 +36,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function isLogin(app) {
+  return app.user !== undefined
+}
+
 const Topbar = (props) => {
+  console.log(props)
+  const { app, login, logout } = props
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    login(email, password)
+  }
   const classes = useStyles();
   return (
     <AppBar position="relative">
@@ -43,13 +59,16 @@ const Topbar = (props) => {
         <Typography variant="h2" color="inherit" noWrap className={classes.title}>
           Funny Movies
         </Typography>
-        <>
+        {!isLogin(app) && (
+        <form
+          onSubmit={handleSubmit}
+        >
           <InputBase
             className={classes.icon}
             placeholder="Email"
             type="email"
-            /* onChange={(e) => setSearch(e.target.value)}
-            value={search} */
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
             classes={{
               root: classes.inputRoot,
               input: classes.inputInput,
@@ -59,35 +78,55 @@ const Topbar = (props) => {
             className={classes.icon}
             placeholder="password"
             type="password"
-            /* onChange={(e) => setSearch(e.target.value)}
-            value={search} */
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
             classes={{
               root: classes.inputRoot,
               input: classes.inputInput,
             }}
           />
-          <Button color="inherit">Login / Register </Button>
-        </>
+          <Button
+            color="inherit"
+            type="submit"
+          >
+            Login / Register
+          </Button>
+        </form>
+        ) }
+        {isLogin(app)
+        && (
         <>
           <Typography
             variant="h6"
           >
-            Welcome
+            Welcome {app.user.email}
           </Typography>
-          <Button>
+          <Button
+            color="inherit"
+          >
             Share a movie
           </Button>
-          <Button>
+          <Button
+            color="inherit"
+            onClick={() => logout(email)}
+          >
             Logout
           </Button>
         </>
+        )}
       </Toolbar>
     </AppBar>
   );
 };
 
 const mapStateToProps = (state) => ({
-  ...state.auth
+  app: state.app,
 });
 
-export default connect(mapStateToProps, undefined)(Topbar);
+function mapDispatchToProps(dispatch) {
+  return {
+    login: (email, password) => dispatch(appAction.login(email, password)),
+    logout: (email) => dispatch(appAction.logout(email))
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Topbar);

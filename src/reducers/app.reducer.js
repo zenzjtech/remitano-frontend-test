@@ -1,28 +1,18 @@
 import cst from '../constants';
 
-const initialState = { errorMessage: '', loading: false };
+const initialState = { };
 
 export const app = (state = initialState, action) => {
   switch (action.type) {
-    case cst.ACTION_ERROR_OCCURS:
+    case cst.ACTION_LOGIN:
       return {
         ...state,
-        errorMessage: action.payload,
+        user: action.payload,
       };
-    case cst.ACTION_CLEAR_ERRORS:
+    case cst.ACTION_LOGOUT:
       return {
         ...state,
-        errorMessage: '',
-      };
-    case cst.ACTION_LOADING:
-      return {
-        ...state,
-        loading: true,
-      };
-    case cst.ACTION_LOADED:
-      return {
-        ...state,
-        loading: false,
+        user: undefined
       };
     default:
       return state;

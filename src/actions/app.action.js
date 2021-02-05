@@ -1,14 +1,25 @@
 import cst from '../constants';
 
-function showError(errorMessage) {
-  return { type: cst.ACTION_ERROR_OCCURS, payload: errorMessage };
+function login(email, password) {
+  return {
+    type: cst.ACTION_LOGIN,
+    payload: {
+      email,
+      password
+    }
+  }
 }
 
-function clearError() {
-  return { type: cst.ACTION_CLEAR_ERRORS };
+function logout(email) {
+  return {
+    type: cst.ACTION_LOGOUT,
+    payload: {
+      email
+    }
+  }
 }
 
 export const appAction = {
-  showError,
-  clearError,
+  login,
+  logout
 };

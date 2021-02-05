@@ -2,8 +2,9 @@ const cst = {
   ACTION_OPEN_TAB: 'open.tab',
   ACTION_LOADING: 'loading',
   ACTION_LOADED: 'loaded',
-  ACTION_ERROR_OCCURS: 'err.occur',
-  ACTION_CLEAR_ERRORS: 'err.clear',
+  ACTION_LOGIN: 'login',
+  ACTION_REGISTER: 'register',
+  ACTION_LOGOUT: 'logout',
 };
 
 export default cst;
