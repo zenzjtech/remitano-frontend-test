@@ -1,6 +1,6 @@
 import cst from '../constants';
 
-const initialState = { page: cst.PAGE_HOME, loading: false };
+const initialState = { page: cst.PAGE_HOME, loading: false, movies: [] };
 
 export const app = (state = initialState, action) => {
   switch (action.type) {
@@ -13,6 +13,7 @@ export const app = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        movies: (state.movies || []).concat(action.payload)
       }
     case cst.ACTION_LOGIN:
       return {

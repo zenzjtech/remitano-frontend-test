@@ -8,6 +8,8 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import CardActions from '@material-ui/core/CardActions'
 import Card from '@material-ui/core/Card'
+import { connect } from 'react-redux'
+import { shorten } from '../../../utils'
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -29,64 +31,54 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
   },
-  cardMedia: {
-    paddingTop: '56.25%', // 16:9
-  },
+  cardMedia: {},
   cardContent: {
     flexGrow: 1,
   },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-const MyComponent = () => {
+const MainPage = (props) => {
   const classes = useStyles()
+  const { app } = props;
+  const movies = app.movies || []
   return (
     <main>
-      {/* Hero unit */}
-      <div className={classes.heroContent}>
-        <Container maxWidth="sm">
-          <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-            Album layout
-          </Typography>
-          <Typography variant="h5" align="center" color="textSecondary" paragraph>
-            Something short and leading about the collection below—its contents, the creator, etc.
-            Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-            entirely.
-          </Typography>
-          <div className={classes.heroButtons}>
-            <Grid container spacing={2} justify="center">
-              <Grid item>
-                <Button variant="contained" color="primary">
-                  Main call to action
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button variant="outlined" color="primary">
-                  Secondary action
-                </Button>
-              </Grid>
-            </Grid>
-          </div>
-        </Container>
-      </div>
       <Container className={classes.cardGrid} maxWidth="md">
         {/* End hero unit */}
         <Grid container spacing={4}>
-          {cards.map((card) => (
-            <Grid item key={card} xs={12} sm={6} md={4}>
+          {movies.map((movie) => (
+            <Grid item key={movie} xs={12} sm={6} md={4}>
               <Card className={classes.card}>
                 <CardMedia
                   className={classes.cardMedia}
-                  image="https://source.unsplash.com/random"
                   title="Image title"
-                />
+                >
+                  <iframe
+                    src="https://www.youtube.com/embed/tgbNymZ7vqY"
+                    width='100%'
+                  />
+                </CardMedia>
                 <CardContent className={classes.cardContent}>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    Heading
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="h2"
+                    color="secondary"
+                  >
+                    { shorten(movie.snippet.title) }
                   </Typography>
-                  <Typography>
-                    This is a media card. You can use this section to describe the content.
+                  <Typography
+                    gutterBottom
+                  >
+                     { `Share by: ${movie.user}` }
+                  </Typography>
+                  <Typography
+                    gutterBottom
+                  >
+                    Description:
+                  </Typography>
+                  <Typography variant="caption">
+                    { shorten(movie.snippet.description) }
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -106,4 +98,8 @@ const MyComponent = () => {
   )
 }
 
-export default MyComponent
+const mapStateToProps = state => ({
+  app: state.app
+})
+
+export default connect(mapStateToProps)(MainPage)

@@ -8,7 +8,7 @@ import { SnackbarProvider } from 'notistack';
 
 import reduxStore from './store';
 import theme from './theme/index';
-import Album from './page/home/Album';
+import Album from './page/home';
 
 const { store, persistor } = reduxStore();
 

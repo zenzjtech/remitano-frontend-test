@@ -6,8 +6,8 @@ function login(email, password) {
     type: cst.ACTION_LOGIN,
     payload: {
       email,
-      password
-    }
+      password,
+    },
   }
 }
 
@@ -15,31 +15,37 @@ function logout(email) {
   return {
     type: cst.ACTION_LOGOUT,
     payload: {
-      email
-    }
+      email,
+    },
   }
 }
 
 function switchPage(page) {
   return {
     type: cst.ACTION_SWITCH_PAGE,
-    payload: page
+    payload: page,
   }
 }
 
 function getMovieInfo(url) {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const state = getState()
     let response;
     try {
       dispatch({ type: cst.ACTION_LOADING })
       response = await getYoutubeVideoDescription(url)
-      console.log(response)
       return response;
     } catch (error) {
       dispatch({ type: cst.ACTION_FETCHED_FAIL });
       throw error;
     } finally {
-      dispatch({ type: cst.ACTION_LOADED, payload: response })
+      dispatch({
+        type: cst.ACTION_LOADED,
+        payload: {
+          ...response.items[0],
+          user: state.app.user.email,
+        },
+      })
     }
   }
 }
@@ -48,5 +54,5 @@ export const appAction = {
   login,
   logout,
   switchPage,
-  getMovieInfo
+  getMovieInfo,
 };

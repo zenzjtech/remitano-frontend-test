@@ -5,7 +5,7 @@ function handleResponse(response) {
       throw error;
     }
 
-    return text;
+    return JSON.parse(text);
   });
 }
 

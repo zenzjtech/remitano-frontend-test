@@ -8,7 +8,6 @@ function getIdFromUrl(url) {
 }
 
 export function getYoutubeVideoDescription(url) {
-  //1KFQTnfzMGY&key=[YOUR_API_KEY] HTTP/1.1
   const id = getIdFromUrl(url)
-  fetch(`${rootUrl}${id}`).then(handleResponse).then(console.log)
+  return fetch(`${rootUrl}${id}`).then(handleResponse)
 }

@@ -10,9 +10,9 @@ import Container from '@material-ui/core/Container'
 import Box from '@material-ui/core/Box'
 import TextField from '@material-ui/core/TextField'
 import { connect } from 'react-redux'
-import { appAction } from '../../actions/app.action'
-import { formError } from '../../utils'
-import cst from '../../constants'
+import { appAction } from '../../../actions/app.action'
+import { formError } from '../../../utils'
+import cst from '../../../constants'
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -42,8 +42,8 @@ const MovieSharing = (props) => {
       await getMovieInfo(url)
       enqueueSnackbar('Successfully add movie data', { variant: 'info' })
       switchPage(cst.PAGE_HOME)
-    } catch (e) {
-      enqueueSnackbar(formError(e, 'Fail to load youtube movie'))
+    } catch (err) {
+      enqueueSnackbar(formError(err, 'Fail to load youtube movie'))
     }
   }
   return (
