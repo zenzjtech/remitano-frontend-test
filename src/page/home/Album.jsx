@@ -7,23 +7,15 @@ import { appAction } from '../../actions/app.action'
 import { connect } from 'react-redux'
 import cst from '../../constants'
 import MainPage from './MainPage'
-import { MovieSharing } from './MovieSharing'
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>
-      {' '}
-      {new Date().getFullYear()}
-      .
-    </Typography>
-  );
-}
+import MovieSharing from './MovieSharing'
+import './index.css'
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column'
+  },
   footer: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
@@ -35,11 +27,13 @@ const Album = (props) => {
   const classes = useStyles();
   const {page, switchPage} = props;
   return (
-    <>
+    <div
+      className={classes.root}
+    >
       <Topbar />
       {page === cst.PAGE_HOME && <MainPage /> }
       {page === cst.PAGE_SEARCH && <MovieSharing /> }
-    </>
+    </div>
   );
 }
 

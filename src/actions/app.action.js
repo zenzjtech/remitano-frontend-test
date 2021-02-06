@@ -1,4 +1,5 @@
 import cst from '../constants';
+import { getYoutubeVideoDescription } from '../services/app.service'
 
 function login(email, password) {
   return {
@@ -26,8 +27,26 @@ function switchPage(page) {
   }
 }
 
+function getMovieInfo(url) {
+  return async (dispatch) => {
+    let response;
+    try {
+      dispatch({ type: cst.ACTION_LOADING })
+      response = await getYoutubeVideoDescription(url)
+      console.log(response)
+      return response;
+    } catch (error) {
+      dispatch({ type: cst.ACTION_FETCHED_FAIL });
+      throw error;
+    } finally {
+      dispatch({ type: cst.ACTION_LOADED, payload: response })
+    }
+  }
+}
+
 export const appAction = {
   login,
   logout,
-  switchPage
+  switchPage,
+  getMovieInfo
 };

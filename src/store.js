@@ -9,7 +9,6 @@ import rootReducer from './reducers';
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['nav'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

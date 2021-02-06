@@ -1,48 +1,66 @@
 // @flow
 import * as React from 'react'
+import { useSnackbar } from 'notistack';
 import FormControl from '@material-ui/core/FormControl'
 import { useState } from 'react'
 import InputLabel from '@material-ui/core/InputLabel'
-import { colors } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
 import Box from '@material-ui/core/Box'
-import { makeStyles } from '@material-ui/core'
-import Typography from '@material-ui/core/Typography'
-import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
+import { connect } from 'react-redux'
+import { appAction } from '../../actions/app.action'
+import { formError } from '../../utils'
+import cst from '../../constants'
 
 const useStyles = makeStyles((theme) => ({
   item: {
     marginTop: theme.spacing(4),
-    width: '60%'
+    width: '60%',
   },
   form: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 }))
 
-export const MovieSharing = () => {
+const MovieSharing = (props) => {
   const classes = useStyles()
+  const { enqueueSnackbar } = useSnackbar();
+  const { getMovieInfo, switchPage } = props;
   const [url, setUrl] = useState('')
 
   const handleChange = (e) => {
     setUrl(e.target.value)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(e)
+    try {
+      await getMovieInfo(url)
+      enqueueSnackbar('Successfully add movie data', { variant: 'info' })
+      switchPage(cst.PAGE_HOME)
+    } catch (e) {
+      enqueueSnackbar(formError(e, 'Fail to load youtube movie'))
+    }
   }
   return (
-    <main>
+    <Box
+      display="fex"
+      flexDirection="column"
+      justify="center"
+      alignItems="center"
+      flexGrow={1}
+      mb={8}
+    >
       <Container
+        flexGrow={1}
         maxWidth="sm"
         component={Box}
-        pb={4}
-        boxShadow={24}
+        pb={6}
+        boxShadow={10}
         bgcolor="background.paper"
       >
         <InputLabel htmlFor="url">Share a youtube movie</InputLabel>
@@ -68,6 +86,13 @@ export const MovieSharing = () => {
           </Button>
         </FormControl>
       </Container>
-    </main>
+    </Box>
   )
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  getMovieInfo: (url) => dispatch(appAction.getMovieInfo(url)),
+  switchPage: (page) => dispatch(appAction.switchPage(page)),
+})
+
+export default connect(undefined, mapDispatchToProps)(MovieSharing)

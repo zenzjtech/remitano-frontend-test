@@ -1,6 +1,6 @@
 import { handleResponse } from './helper'
 
-const rootUrl = `https://youtube.googleapis.com/youtube/v3/videos?part=contentDetails&part=topicDetails&key=${process.env.REACT_APP_YOUTUBE_API_KEY}id=`
+const rootUrl = `https://youtube.googleapis.com/youtube/v3/videos?part=contentDetails&part=topicDetails&part=snippet&key=${process.env.REACT_APP_YOUTUBE_API_KEY}&id=`
 
 function getIdFromUrl(url) {
   const urlParser = new URL(url)
