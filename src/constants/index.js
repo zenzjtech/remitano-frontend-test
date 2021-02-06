@@ -5,6 +5,9 @@ const cst = {
   ACTION_LOGIN: 'login',
   ACTION_REGISTER: 'register',
   ACTION_LOGOUT: 'logout',
+  ACTION_SWITCH_PAGE: 'SWITCH-PAGE',
+  PAGE_HOME: 'PAGE-MAIN',
+  PAGE_SEARCH: 'PAGE-SEARCH'
 };
 
 export default cst;

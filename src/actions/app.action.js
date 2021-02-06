@@ -19,7 +19,15 @@ function logout(email) {
   }
 }
 
+function switchPage(page) {
+  return {
+    type: cst.ACTION_SWITCH_PAGE,
+    payload: page
+  }
+}
+
 export const appAction = {
   login,
-  logout
+  logout,
+  switchPage
 };

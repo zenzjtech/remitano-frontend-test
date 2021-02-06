@@ -1,6 +1,6 @@
 import cst from '../constants';
 
-const initialState = { };
+const initialState = { page: cst.PAGE_HOME };
 
 export const app = (state = initialState, action) => {
   switch (action.type) {
@@ -14,6 +14,12 @@ export const app = (state = initialState, action) => {
         ...state,
         user: undefined
       };
+    case cst.ACTION_SWITCH_PAGE: {
+      return {
+        ...state,
+        page: action.payload
+      }
+    }
     default:
       return state;
   }

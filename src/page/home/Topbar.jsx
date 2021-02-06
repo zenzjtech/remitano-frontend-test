@@ -11,8 +11,9 @@ import {
 } from '@material-ui/icons';
 import InputBase from '@material-ui/core/InputBase';
 import { connect } from 'react-redux';
-import { appAction } from '../../actions'
 import { useState } from 'react'
+import { appAction } from '../../actions'
+import cst from '../../constants'
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -42,7 +43,9 @@ function isLogin(app) {
 
 const Topbar = (props) => {
   console.log(props)
-  const { app, login, logout } = props
+  const {
+    app, login, logout, switchPage,
+  } = props
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -55,8 +58,15 @@ const Topbar = (props) => {
   return (
     <AppBar position="relative">
       <Toolbar>
-        <HomeIcon className={classes.icon} />
-        <Typography variant="h2" color="inherit" noWrap className={classes.title}>
+        <HomeIcon className={classes.icon} onClick={() => switchPage(cst.PAGE_HOME)} />
+        <Typography
+          variant="h2"
+          component="a"
+          onClick={() => switchPage(cst.PAGE_HOME)}
+          color="inherit"
+          noWrap
+          className={classes.title}
+        >
           Funny Movies
         </Typography>
         {!isLogin(app) && (
@@ -99,10 +109,13 @@ const Topbar = (props) => {
           <Typography
             variant="h6"
           >
-            Welcome {app.user.email}
+            Welcome
+            {' '}
+            {app.user.email}
           </Typography>
           <Button
             color="inherit"
+            onClick={() => switchPage(cst.PAGE_SEARCH)}
           >
             Share a movie
           </Button>
@@ -126,7 +139,8 @@ const mapStateToProps = (state) => ({
 function mapDispatchToProps(dispatch) {
   return {
     login: (email, password) => dispatch(appAction.login(email, password)),
-    logout: (email) => dispatch(appAction.logout(email))
+    logout: (email) => dispatch(appAction.logout(email)),
+    switchPage: (page) => dispatch(appAction.switchPage(page)),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Topbar);
