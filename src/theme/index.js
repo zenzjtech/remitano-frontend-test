@@ -2,6 +2,10 @@ import { createMuiTheme, colors } from '@material-ui/core';
 import shadows from './shadows';
 import typography from './typography';
 
+const primaryColor = colors.indigo[500]
+const secondaryColor = colors.green[500]
+const secondGradientColor = '#4791db'
+
 const theme = createMuiTheme({
   palette: {
     background: {
@@ -22,6 +26,15 @@ const theme = createMuiTheme({
   },
   shadows,
   typography,
+  overrides: {
+    MuiAppBar: {
+      colorPrimary: {
+        background: `linear-gradient(45deg, ${primaryColor} 50%, ${secondGradientColor} 80%)`,
+        color: 'white',
+        boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)',
+      },
+    },
+  },
 });
 
 export default theme;

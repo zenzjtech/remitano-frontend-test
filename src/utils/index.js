@@ -4,7 +4,6 @@ export function formError(error, message) {
 }
 
 export function shorten(s) {
-  if (s.length > 97)
-    return s.slice(0, 97) + '...'
+  if (s.length > 97) return `${s.slice(0, 97)}...`
   return s;
 }

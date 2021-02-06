@@ -7,8 +7,8 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { SnackbarProvider } from 'notistack';
 
 import reduxStore from './store';
-import theme from './theme/index';
-import Album from './page/home';
+import theme from './theme';
+import Home from './page/home';
 
 const { store, persistor } = reduxStore();
 
@@ -17,13 +17,12 @@ export default function App() {
     <StyledEngineProvider injectFirst>
       <Provider store={store}>
         <PersistGate persistor={persistor}>
-          <ThemeProvider theme={theme}>
-            <SnackbarProvider maxSnack={3}>
-              {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-              <CssBaseline />
-              <Album />
-            </SnackbarProvider>
-          </ThemeProvider>
+          <SnackbarProvider maxSnack={3}>
+            <CssBaseline />
+            <ThemeProvider theme={theme}>
+              <Home />
+            </ThemeProvider>
+          </SnackbarProvider>
         </PersistGate>
       </Provider>
     </StyledEngineProvider>

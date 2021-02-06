@@ -13,7 +13,7 @@ export const app = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        movies: (state.movies || []).concat(action.payload)
+        movies: (state.movies || []).concat(action.payload),
       }
     case cst.ACTION_LOGIN:
       return {
