@@ -32,6 +32,34 @@ test('Login', async () => {
   expect(screen.getByText(/t@t.t/i)).toBeInTheDocument()
 })
 
+test('Login with wrong credential', async () => {
+  render(<Home />, { initialState: { app: { page: cst.PAGE_HOME, loading: false, movies: [] } } })
+
+  // Login first
+  fireEvent.change(screen.getByPlaceholderText(/email/i), {
+    target: { value: 't@t.t' },
+  })
+  fireEvent.change(screen.getByPlaceholderText(/password/i), {
+    target: { value: '1' },
+  })
+
+  fireEvent.click(screen.getByText(/login/i))
+  fireEvent.click(screen.getByText(/logout/i))
+
+  // Login with wrong credential
+  fireEvent.change(screen.getByPlaceholderText(/email/i), {
+    target: { value: 't@t.t' },
+  })
+  fireEvent.change(screen.getByPlaceholderText(/password/i), {
+    target: { value: '2' },
+  })
+
+  fireEvent.click(screen.getByText(/login/i))
+
+  // Can't login
+  expect(screen.getByText(/login/i)).toBeInTheDocument()
+})
+
 test('Logout', async () => {
   render(<Home />, {
     initialState: {
@@ -63,5 +91,5 @@ test('Navigation', async () => {
 
 /*  fireEvent.click(screen.getByText(/funny movies/i))
   console.log(screen.getByText(/Share a youtube movie/i))
-  expect(screen.getByText(/Share a youtube movie/i)).not.toBeInTheDocument()*/
+  expect(screen.getByText(/Share a youtube movie/i)).not.toBeInTheDocument() */
 })
