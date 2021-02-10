@@ -5,6 +5,7 @@ module.exports = {
   },
   extends: [
     'plugin:react/recommended',
+    'plugin:jest/recommended',
     'airbnb',
   ],
   parserOptions: {
@@ -21,5 +22,6 @@ module.exports = {
     'import/prefer-default-export': 'off',
     semi: 'off',
     'react/prop-types': 'off',
+    'import/no-useless-path-segments': 'off'
   },
 };
