@@ -12,17 +12,18 @@ import {
 import InputBase from '@material-ui/core/InputBase';
 import { connect } from 'react-redux';
 import { useState } from 'react'
+import { useSnackbar } from 'notistack'
 import { appAction } from '../../../actions'
 import cst from '../../../constants'
 
 const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
-    cursor: 'pointer'
+    cursor: 'pointer',
   },
   icon: {
     marginRight: theme.spacing(2),
-    cursor: 'pointer'
+    cursor: 'pointer',
   },
   inputRoot: {
     color: 'inherit',
@@ -47,13 +48,15 @@ const Topbar = (props) => {
   const {
     app, login, logout, switchPage,
   } = props
-
+  const { enqueueSnackbar } = useSnackbar();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    login(email, password)
+    const result = await login(email, password)
+    if (result) enqueueSnackbar('Sucessfully login', { variant: 'info' })
+    else enqueueSnackbar('Password is incorrect', { variant: 'error' })
   }
   const classes = useStyles();
   return (

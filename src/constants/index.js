@@ -3,6 +3,7 @@ const cst = {
   ACTION_LOADING: 'loading',
   ACTION_LOADED: 'loaded',
   ACTION_LOGIN: 'login',
+  ACTION_LOGIN_FAIL: 'login-fail',
   ACTION_REGISTER: 'register',
   ACTION_FETCHED_FAIL: 'ACTION-FETCH-FAIL',
   ACTION_LOGOUT: 'logout',
@@ -10,6 +11,7 @@ const cst = {
   ACTION_SWITCH_PAGE: 'SWITCH-PAGE',
   PAGE_HOME: 'PAGE-MAIN',
   PAGE_SEARCH: 'PAGE-SEARCH',
+  KEY_DB: 'DATABASE-KEY'
 };
 
 export default cst;

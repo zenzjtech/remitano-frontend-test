@@ -1,13 +1,23 @@
 import cst from '../constants';
-import { getYoutubeVideoDescription } from '../services/app.service'
+import { getYoutubeVideoDescription, checkCredential } from '../services/app.service'
 
 function login(email, password) {
-  return {
-    type: cst.ACTION_LOGIN,
-    payload: {
-      email,
-      password,
-    },
+  return async (dispatch) => {
+    const result = checkCredential(email, password)
+    if (result) {
+      dispatch({
+        type: cst.ACTION_LOGIN,
+        payload: {
+          email,
+          password,
+        },
+      })
+    } else {
+      dispatch({
+        type: cst.ACTION_LOGIN_FAIL,
+      })
+    }
+    return result;
   }
 }
 
