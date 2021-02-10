@@ -5,7 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "NODE_OPTIONS=--experimental-vm-modules react-scripts test --transformIgnorePatterns './node_modules/(?!@material-ui).+\\\\.js$'",
+    "test": "NODE_OPTIONS=--experimental-vm-modules react-scripts test --transformIgnorePatterns './node_modules/(?!@material-ui|notistack).+\\\\.js$'",
     "eject": "react-scripts eject",
     "lint": "./node_modules/eslint/bin/eslint.js --fix .",
     "postinstall": "patch-package"

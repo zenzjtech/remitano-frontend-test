@@ -44,7 +44,6 @@ function isLogin(app) {
 }
 
 const Topbar = (props) => {
-  console.log(props)
   const {
     app, login, logout, switchPage,
   } = props
