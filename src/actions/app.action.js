@@ -44,11 +44,6 @@ function getMovieInfo(url) {
     try {
       dispatch({ type: cst.ACTION_LOADING })
       response = await getYoutubeVideoDescription(url)
-      return response;
-    } catch (error) {
-      dispatch({ type: cst.ACTION_FETCHED_FAIL });
-      throw error;
-    } finally {
       dispatch({
         type: cst.ACTION_LOADED,
         payload: {
@@ -56,6 +51,10 @@ function getMovieInfo(url) {
           user: state.app.user.email,
         },
       })
+      return response;
+    } catch (error) {
+      dispatch({ type: cst.ACTION_FETCHED_FAIL });
+      throw error;
     }
   }
 }

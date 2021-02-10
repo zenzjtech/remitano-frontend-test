@@ -5,7 +5,9 @@ function handleResponse(response) {
       throw error;
     }
 
-    return JSON.parse(text);
+    const result = JSON.parse(text);
+    if (result.pageInfo.totalResults === 0) throw new Error('No movie with this id')
+    return result;
   });
 }
 
