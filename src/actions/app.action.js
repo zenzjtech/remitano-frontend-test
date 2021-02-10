@@ -2,7 +2,7 @@ import cst from '../constants';
 import { getYoutubeVideoDescription, checkCredential } from '../services/app.service'
 
 function login(email, password) {
-  return async (dispatch) => {
+  return (dispatch) => {
     const result = checkCredential(email, password)
     if (result) {
       dispatch({
