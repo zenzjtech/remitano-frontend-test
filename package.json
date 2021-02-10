@@ -8,7 +8,7 @@
     "test": "NODE_OPTIONS=--experimental-vm-modules react-scripts test --transformIgnorePatterns './node_modules/(?!@material-ui|notistack).+\\\\.js$'",
     "eject": "react-scripts eject",
     "lint": "./node_modules/eslint/bin/eslint.js --fix .",
-    "postinstall": "patch-package"
+    "postinstall": "if test \"$NODE_ENV\" != \"production\" ; then patch-package; fi"
   },
   "dependencies": {
     "@emotion/react": "latest",
