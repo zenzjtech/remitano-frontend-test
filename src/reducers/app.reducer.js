@@ -24,6 +24,7 @@ export const app = (state = initialState, action) => {
       return {
         ...state,
         user: undefined,
+        page: cst.PAGE_HOME
       };
     case cst.ACTION_SWITCH_PAGE: {
       return {
