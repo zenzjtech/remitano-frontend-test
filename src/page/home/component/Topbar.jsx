@@ -83,6 +83,7 @@ const Topbar = (props) => {
             type="email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
+            required
             classes={{
               root: classes.inputRoot,
               input: classes.inputInput,
@@ -92,6 +93,7 @@ const Topbar = (props) => {
             className={classes.icon}
             placeholder="password"
             type="password"
+            required
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             classes={{
